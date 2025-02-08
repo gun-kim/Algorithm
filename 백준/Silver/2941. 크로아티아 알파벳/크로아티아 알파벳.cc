@@ -20,7 +20,7 @@ int count(std::string str)
   {
     while (1)
     {
-      if (str.find(alpa[i]) != -1)
+      if (str.find(alpa[i]) != std::string::npos)
       {
         str.replace(str.find(alpa[i]), alpa[i].length(), "#");
       }
