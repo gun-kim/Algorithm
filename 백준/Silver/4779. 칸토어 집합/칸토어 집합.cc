@@ -1,33 +1,50 @@
-#include <iostream>
-#include <cmath>
+#include <bits/stdc++.h>
 using namespace std;
 
-void cantor(int n) {
-	int size = pow(3, n - 1);
+int main() {
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(nullptr);
 
-	// N = 0 인 경우 "-" 출력
-	if (n == 0) {
-		cout << "-";
-		return;
-	}
 
-	// N번째 칸토어 집합 = N -1 번째 칸토어 집합을 2개 이은 것
-	// 사이에 공백이 N - 1번째 칸토어 집합의 사이즈만큼 있어야 함
-	cantor(n - 1);
-	for (int i = 0; i < size; i++) {
-		cout << " ";
-	}
-	cantor(n - 1);
+  void kan(int start, int length, vector<char>&vec);
+  int N;
+  while (cin >> N)
+  {
 
+    if (0 > N || N > 12)
+    {
+      return 0;
+    }
+    if (N == 0)
+    {
+      cout << "-" << "\n";
+      continue;
+    }
+    
+    int K = pow(3, N);
+    vector<char> vec(K, '-');
+    kan(0, K, vec);
+
+    for (char c : vec) cout << c;
+    cout << "\n";
+  
+  }
+
+
+  return 0;
 }
 
-int main() {
-	int N;
+void kan(int start, int length ,vector<char>& vec)
+{
+  if (length == 1) return;
 
-	while (cin >> N) {
-		cantor(N);
-		cout << "\n";
-	}
+  int div = length / 3;
+  for (int i = start + div; i < start + 2 * div; i++)
+  {
+    vec[i] = ' ';
+  }
 
-	return 0;
+  kan(start, div, vec);
+  kan(start + 2 * div, div, vec);
 }
